@@ -1,4 +1,4 @@
-from app import create_app, cli, cli
+from app import create_app, cli
 from app.models import Account, Car
 
 
