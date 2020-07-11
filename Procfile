@@ -1,1 +1,1 @@
-web: flask db upgrade; gunicorn ridesharing:app
+web: flask db upgrade; source .env; unicorn ridesharing:app
