@@ -1,0 +1,48 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Ride from</th>
+      <th scope="col">Ride to</th>
+      <th scope="col">Ride time</th>
+      <th scope="col">Free seats</th>
+      <th scope="col">About ride</th>
+      <th scope="col">Subscription</th>
+      <th scope="col">Chat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ride.from_location}}</td>
+      <td>{{ride.to_location}}</td>
+      <td>{{ride.ride_time}}</td>
+      <td>{{ride.free_seats}}</td>
+      {% if ride.about_ride %}
+        <td>{{ride.about_ride}}</td>
+      {% else %}
+        <td>{{_('Nothing was said about the ride yet.')}}</td>
+      {% endif %}
+      <td>
+      {% if ride.is_subscribed(current_user) %}
+            <a href="{{ url_for('ride.unsubscribe_from_ride', ride_id=ride.id)}}"> Unsubscribe from ride </a>
+      {% elif ride.driver == current_user.id %}
+            You created this ride
+      {% else %}
+            {% if ride.has_seats %}
+                <a href="{{ url_for('ride.subscribe_to_ride', ride_id=ride.id)}}"> Subscribe to ride </a>
+            {% else %}
+                Ride has no seats left
+            {% endif %}
+      {% endif %}
+      </td>
+      <td>
+      {% if ride.is_subscribed(current_user) %}
+            <a href="{{ url_for('ride.chat', ride_id=ride.id)}}"> Chat</a>
+      {% elif ride.driver == current_user.id %}
+            <a href="{{url_for('ride.chat', ride_id=ride.id)}}"> Chat </a>
+      {% else %}
+            Subscribe first
+      {% endif %}
+      </td>
+    </tr>
+  </tbody>
+</table>

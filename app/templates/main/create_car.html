@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block app_content %}
+    <h1> Create car </h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.brand.label }}
+            {{ form.brand(size=32)}}
+            {% for error in form.brand.errors %}
+                <span> {{ error }} </span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.model.label }}
+            {{ form.model(size=32)}}
+            {% for error in form.model.errors %}
+                <span> {{ error }} </span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.color.label }}
+            {{ form.color(size=32)}}
+            {% for error in form.color.errors %}
+                <span> {{ error }} </span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.submit() }}
+        </p>
+    </form>
+{% endblock %}

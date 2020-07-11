@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block app_content %}
+{% if form.cars.choices %}
+    <h1> Create ride </h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.from_location.label }}
+            {{ form.from_location(size=32)}}
+            {% for error in form.from_location.errors %}
+                <span> {{ error }} </span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.to_location.label }}
+            {{ form.to_location(size=32)}}
+            {% for error in form.to_location.errors %}
+                <span> {{ error }} </span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.ride_time.label }}
+            {{ form.ride_time(size=32)}}
+            {% for error in form.ride_time.errors %}
+                <span> {{ error }} </span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.about_ride.label }}
+            {{ form.about_ride(size=50)}}
+            {% for error in form.about_ride.errors %}
+                <span> {{ error }} </span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.cars.label }}
+            {{ form.cars }}
+            {% for error in form.cars.errors %}
+                <span> {{ error }} </span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.free_seats.label }}
+            {{ form.free_seats }}
+            {% for error in form.free_seats.errors %}
+                <span> {{ error }} </span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.submit() }}
+        </p>
+    </form>
+    {% else %}
+    <a href="{{url_for('main.create_car')}}"> Please create a car first </a>
+{% endif %}
+{% endblock %}

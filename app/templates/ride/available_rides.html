@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block app_content %}
+    {% if rides != None %}
+        <h1> {{_(' Available Rides')}}:</h1>
+        {% for ride in rides %}
+        {% if ride.has_seats%}
+            {% include '_ride.html' %} <br>
+        {% endif %}
+        {% endfor %}
+        {% if prev_url %}
+            <a href="{{ prev_url }}">{{_('Newer rides')}}</a>
+        {% endif %}
+        {% if next_url %}
+            <a href="{{ next_url }}">{{_('Older rides')}}</a>
+        {% endif %}
+        {{ req }}
+    {% endif %}
+{% endblock%}

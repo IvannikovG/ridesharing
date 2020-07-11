@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block app_content %}
+    <h1> {{_('Chat for your ride from')}} {{ride.from_location}} </h1>
+
+    {% for message in messages %}
+        <p>{{message.user_posted_username}}: {{message.content}} </p>
+    {% endfor %}
+
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.message.label }}
+            {{ form.message(size=32)}}
+            {% for error in form.message.errors %}
+                <span> {{ error }} </span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.submit() }}
+        </p>
+    </form>
+{% endblock %}

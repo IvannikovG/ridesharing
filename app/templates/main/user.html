@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block app_content %}
+
+    <a href="{{url_for('main.edit_profile')}}"> Edit Profile </a>
+    <table>
+        <tr valign="top">
+            <td><img src="{{ user.avatar(128) }}"></td>
+            <td><h1>User: {{ user.username }}</h1></td>
+        </tr>
+        <tr>
+            <td>
+                {% if user.last_seen %}
+                    <p>Last seen on: {{ user.last_seen.strftime('%Y-%m-%d') }}</p>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% if user.about_me %}
+                    {{ user.about_me }}
+                {% endif %}
+            </td>
+            <td>
+                {% if user.last_seen %}
+                    <p>Member since: {{ user.member_since_utc.strftime('%Y-%m-%d') }}</p>
+                {% endif %}
+            </td>
+        </tr>
+
+    </table>
+    <hr>
+    <br>
+
+
+    {% if cars != None %}
+        <h3> Cars: </h3>
+        {% for car in cars %}
+            {% include '_car.html' %} <br>
+        {% endfor %}
+    {% endif %}
+
+    {% if rides_as_driver != None %}
+        <h3> Rides: </h3>
+        {% for ride in rides_as_driver %}
+            <p> Rides created by you: </p>
+            <p>{{ride.from_location}} - {{ride.to_location}} - {{ride.ride_time}} </p>
+
+        {% endfor %}
+    {% endif %}
+    {% if prev_url %}
+            <a href="{{ prev_url }}">Newer rides</a>
+    {% endif %}
+    {% if next_url %}
+            <a href="{{ next_url }}">Older rides</a>
+    {% endif %}
+    <br>
+    <hr>
+
+    <a href="{{url_for('main.delete_profile')}}"> Delete Profile </a>
+{% endblock %}
