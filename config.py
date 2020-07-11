@@ -8,7 +8,7 @@ load_dotenv(os.path.join(basedir, '.env'))
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY')
     SQLALCHEMY_DATABASE_URI = os.environ.get(
-        "DATABASE_URL", f"sqlite:///{_default_sqlite_db}")
+        "DATABASE_URL")
     MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     RIDES_PER_PAGE = 5
